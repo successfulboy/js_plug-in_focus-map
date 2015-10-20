@@ -55,6 +55,7 @@
 #right{
 	right:50px;
 }
+
 .container:hover #left,.container:hover #right{
 	display: block;
 }
