@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>焦点图插件演示Demo</title>
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+	<script type="text/javascript" src="js/jquery.1.10.2.js"></script>
+	<script type="text/javascript">
+		$(function(){
+				var container=$('.container'),
+				    list=$('#list'),
+					button=$('#button span'),
+					leftArrow=$('#left'),
+					rightArrow=$('#right');
+					index=0,
+				    len=button.length,
+				    interval=30,
+					timer=null;
+				leftArrow.bind('click',function(){
+					if (list.is(':animated')) {
+	                    return;
+	                }
+					index++;
+					if(index>4)
+						index=0;
+					animate(-600);
+					showButton();
+				});
+
+				rightArrow.bind('click',function(){
+					if (list.is(':animated')) {
+	                    return;
+	                }
+					index--;
+					if(index<0)
+						index=4;
+					animate(600);
+					showButton();
+				});
+				
+				button.each(function() {
+					$(this).bind('click', function() {
+						if (list.is(':animated') || $(this).attr('class')=='on') {
+                         return;
+                     }
+                     var myIndex = parseInt($(this).attr('index'));
+                     var offset = -600 * (myIndex - index);
+                     animate(offset);
+                     index = myIndex;
+                     showButton();
+					});
+				});
+
+				container.hover(stop,autoplay);
+				autoplay(); //如果没有这句，需手动触发一次
+				
+				function animate (offset) {
+	                var left = parseInt(list.css('left')) + offset;
+	                if (offset>0) {
+	                    offset = '+=' + offset;
+	                }
+	                else {
+	                    offset = '-=' + Math.abs(offset);
+	                }
+	                console.log(offset);
+	                list.animate({'left': offset}, 300, function () {
+	                    if(left<-2400)
+							left=0;
+						else if (left>0) 
+							left=-2400;
+						list.css('left', left);
+	                });
+	            }
+
+	            function showButton() {
+	                button.eq(index).addClass('on').siblings().removeClass('on');
+	            }
+					
+				function autoplay(){
+					timer=setInterval(function(){
+						leftArrow.trigger('click');
+					},3000);
+				}
+
+				function stop(){
+					clearInterval(timer);
+				}
+			})
+	</script>
+</head>
+<body>
+	<div class="container">
+		<div id="list" style="left:0">
+			<img src="img/1.jpg" height="400" width="600" alt="">
+			<img src="img/2.jpg" height="400" width="600" alt="">
+			<img src="img/3.jpg" height="400" width="600" alt="">
+			<img src="img/4.jpg" height="400" width="600" alt="">
+			<img src="img/5.jpg" height="400" width="600" alt="">
+		</div>
+		<div id="button">
+			<span index='0' class="on"></span>
+			<span index='1'></span>
+			<span index='2'></span>
+			<span index='3'></span>
+			<span index='4'></span>
+		</div>
+		<div id="left">&lt;</div>
+		<div id="right">&gt;</div>
+		
+	</div>
+</body>
+</html>

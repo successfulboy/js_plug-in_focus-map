@@ -1,0 +1,60 @@
+.container{
+	width: 600px;
+	height:400px;
+	overflow: hidden;
+	position: relative;
+}
+#list{
+	width: 3000px;
+	height:400px;
+	position: absolute;
+}
+#list img{
+	float:left;
+}
+#button{
+	position:absolute;
+	width: 100px;
+	top:350px;
+	left:250px;
+	z-index: 2;
+}
+#button span{
+	float: left;
+	width: 10px;
+	height: 10px;
+	border-radius:50%;
+	margin-right: 8px;
+	background-color: gray;
+	cursor: pointer;
+}
+#button .on{
+	background-color: red;
+}
+#left,#right{
+	display: none;
+	position: absolute;
+	top:180px;
+	float: left;
+	width: 40px;
+	height: 40px;
+	line-height: 40px;
+	font-size: 40px;/*调整箭头大小*/
+	font-weight: bold;/*调整箭头粗细*/
+	text-indent: 8px;/*调整箭头缩进*/
+	color: #fff;
+	cursor: pointer;
+	background-color: rgba(0,0,0,.5);
+}
+#left:hover,#right:hover{
+	background-color: rgba(0,0,0,1);
+}
+#left{
+	left:50px;
+}
+#right{
+	right:50px;
+}
+.container:hover #left,.container:hover #right{
+	display: block;
+}
