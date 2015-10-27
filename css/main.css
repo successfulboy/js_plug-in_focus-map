@@ -5,6 +5,9 @@
 	overflow: hidden;
 	position: relative;
 }
+h1{
+	text-align:center;
+}
 #list{
 	width: 3000px;
 	height:400px;
